@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="rectangle" class="edu.samar.spring.shapes.Rectangle" autowire="byName" >
+	</bean>
+			
+	<bean id="pointA" class="edu.samar.spring.shapes.Point">
+		<property name="xlocation" value="0"></property>
+		<property name="ylocation" value="0"></property>
+	</bean>
+	
+	<bean id="pointB" class="edu.samar.spring.shapes.Point">
+		<property name="xlocation" value="20"></property>
+		<property name="ylocation" value="0"></property>
+	</bean>
+	
+	<bean  id="pointC" class="edu.samar.spring.shapes.Point">
+		<property name="xlocation" value="20"></property>
+		<property name="ylocation" value="20"></property>
+	</bean>
+	
+	<bean id="pointD" class="edu.samar.spring.shapes.Point">
+		<property name="xlocation" value="0"></property>
+		<property name="ylocation" value="20"></property>
+	</bean>	
+
+</beans>
