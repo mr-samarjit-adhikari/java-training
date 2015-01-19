@@ -29,7 +29,9 @@
         <property name="hbm2ddl.auto">create</property>
 
         <!-- Names the annotated entity class -->
-        <mapping class="org.hibernate.training.model.StudentDetails"/>
+        <mapping class="org.samar.hibernate.model.Student"/>
+        <mapping class="org.samar.hibernate.model.StudentVehicle"/>
+        <mapping class="org.samar.hibernate.model.StudentAddress"/>
 
     </session-factory>
 
