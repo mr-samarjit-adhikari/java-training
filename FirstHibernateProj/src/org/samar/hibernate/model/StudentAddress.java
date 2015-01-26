@@ -1,4 +1,4 @@
-package org.hibernate.training.model;
+package org.samar.hibernate.model;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

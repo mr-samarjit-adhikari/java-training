@@ -1,15 +1,15 @@
-package org.hibernate.training;
+package org.samar.hibernate.client;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.training.model.StudentAddress;
-import org.hibernate.training.model.StudentDetails;
+import org.samar.hibernate.model.StudentAddress;
+import org.samar.hibernate.model.Student;
 
 public class HibernateClient {
 
 	public static void main(String[] args) {
-		StudentDetails student =  new StudentDetails();
+		Student student =  new Student();
 		
 		student.setId(1);
 		student.setStudentName("Student 1");
@@ -37,10 +37,10 @@ public class HibernateClient {
 		session.close();
 		
 		student = null;
-		StudentDetails student1 = null;
+		Student student1 = null;
 		session = sf.openSession();
-		student = (StudentDetails) session.get(StudentDetails.class, 1);
-		student1 = (StudentDetails) session.get(StudentDetails.class, 1);
+		student = (Student) session.get(Student.class, 1);
+		student1 = (Student) session.get(Student.class, 1);
 //		student1 = (StudentDetails) session.load(StudentDetails.class, 1);
 		
 		session.close();
