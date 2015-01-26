@@ -6,8 +6,8 @@ import com.hp.java.core.threadEg.ThreadTwo;
 public class ExampleThread {
 	
 	public static void  main(String[] args) {
-		RunnableThreadOne runnableThreadOne = new RunnableThreadOne();
-		Thread threadOne = new Thread(runnableThreadOne);
+		RunnableThreadOne runnableThreadOneObj = new RunnableThreadOne();
+		Thread threadOne = new Thread(runnableThreadOneObj);
 		threadOne.start();
 		
 		ThreadTwo threadTwo = new ThreadTwo();
