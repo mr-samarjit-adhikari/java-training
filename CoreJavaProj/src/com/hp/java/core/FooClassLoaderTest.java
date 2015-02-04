@@ -6,7 +6,8 @@ import com.hp.java.core.classloader.FooInterface;
 public class FooClassLoaderTest {
 
 	public static void main(String[] args) {
-		ClassLoader cl =  new FooClassLoader();	
+		ClassLoader	parentcl = FooClassLoaderTest.class.getClassLoader();
+		ClassLoader cl =  new FooClassLoader(parentcl);	
 		Class<?> fooClass = null;
 		try {
 			ClassLoader currLoader = FooClassLoaderTest.class.getClassLoader(); 
@@ -16,8 +17,10 @@ public class FooClassLoaderTest {
 			System.out.println("Loaded "+fooClass.getName());		
 			
 			Object fooObj = fooClass.newInstance();
-			((FooInterface) fooObj).foocall();
-
+			((FooInterface) fooObj).foocall();	
+			
+			System.out.println("FooInterface loader:"+FooInterface.class.getClassLoader());
+			System.out.println("FooClass loader:"+fooObj.getClass().getClassLoader());
 		}
 		catch(NullPointerException e){
 			System.out.println("loadClass return NULL");
