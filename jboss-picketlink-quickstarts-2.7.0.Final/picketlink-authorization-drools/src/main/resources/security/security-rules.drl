@@ -1,0 +1,15 @@
+package PicketLinkPermissions;
+
+dialect 'mvel'
+
+import org.picketlink.idm.drools.PermissionCheck;
+
+rule InvokeTestAction
+  no-loop
+  activation-group "permissions"
+when
+  check: PermissionCheck(resource == "TestAction", operation == "invoke", granted == false)
+then
+  check.grant();
+end
+
