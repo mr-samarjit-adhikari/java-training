@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.as.quickstarts.picketlink.idm.multitenancy.jsf;
+package com.limocat.authentication.idm;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
@@ -38,7 +38,7 @@ import org.picketlink.annotations.PicketLink;
  */
 public class Resources {
 
-    public enum REALM {acme, umbrella, wayne}
+    public enum REALM {Meru, Ola, Easy}
 
     /*
      * Since we are using JPAIdentityStore to store identity-related data, we must provide it with an EntityManager via a

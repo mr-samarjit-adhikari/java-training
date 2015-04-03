@@ -19,7 +19,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jboss.as.quickstarts.picketlink.idm.multitenancy.jsf;
+package com.limocat.authentication.idm;
 
 import org.picketlink.config.SecurityConfigurationBuilder;
 import org.picketlink.event.SecurityConfigurationEvent;
@@ -34,7 +34,6 @@ import javax.enterprise.event.Observes;
  *
  * <p>All the configuration related with Http Security is provided from this bean.</p>
  *
- * @author Pedro Igor
  */
 public class HttpSecurityConfiguration {
 

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.as.quickstarts.picketlink.idm.multitenancy.jsf;
+package com.limocat.authentication.idm;
 
 import org.picketlink.event.PartitionManagerCreateEvent;
 import org.picketlink.idm.IdentityManager;
@@ -35,9 +35,9 @@ public class SecurityInitializer {
     public void createDefaultUsers(@Observes PartitionManagerCreateEvent event) {
         PartitionManager partitionManager = event.getPartitionManager();
 
-        createUserForRealm(partitionManager, Resources.REALM.acme.name(), "bugs");
-        createUserForRealm(partitionManager, Resources.REALM.umbrella.name(), "jill");
-        createUserForRealm(partitionManager, Resources.REALM.wayne.name(), "bruce");
+        createUserForRealm(partitionManager, Resources.REALM.Meru.name(), "meru");
+        createUserForRealm(partitionManager, Resources.REALM.Ola.name(), "ola");
+        createUserForRealm(partitionManager, Resources.REALM.Easy.name(), "easy");
     }
 
     private void createUserForRealm(PartitionManager partitionManager, String realmName, String loginName) {
