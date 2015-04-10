@@ -30,7 +30,7 @@ import javax.inject.Named;
  * We control the authentication process from this bean, so that in the event of a failed authentication we can add an
  * appropriate FacesMessage to the response.
  *
- * @author Pedro Igor
+ * @author Samarjit Adhikari
  */
 @Named
 @RequestScoped

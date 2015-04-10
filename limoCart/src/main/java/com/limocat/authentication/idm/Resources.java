@@ -38,7 +38,7 @@ import org.picketlink.annotations.PicketLink;
  */
 public class Resources {
 
-    public enum REALM {Meru, Ola, Easy}
+    public enum REALM {system}
 
     /*
      * Since we are using JPAIdentityStore to store identity-related data, we must provide it with an EntityManager via a
