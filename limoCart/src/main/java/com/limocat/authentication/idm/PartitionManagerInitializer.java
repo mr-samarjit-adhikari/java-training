@@ -39,24 +39,19 @@ public class PartitionManagerInitializer {
         PartitionManager partitionManager = event.getPartitionManager();
         String			 realmName  	  = Resources.REALM.system.name();
 
-        if(!isRealmExists(partitionManager,realmName) && 
-        		!isSystemUserExists(partitionManager,realmName)){
-        	createSystemUser(partitionManager, realmName, realmName);
+        if(!isSystemUserAndRealmExists(partitionManager,realmName)){
+        	createSystemUserAndRealm(partitionManager, realmName, realmName);
         }
         
     }
-
-    private boolean isRealmExists(PartitionManager pm,String realmName){
-    	Realm  partition = pm.getPartition(Realm.class, realmName);
-    	
-    	if(null == partition){
-    		return false;
-    	}    	    	    	
-    	return true;
-    }
     
-    private boolean isSystemUserExists(PartitionManager pm,String realmName){
+    private boolean isSystemUserAndRealmExists(PartitionManager pm,String realmName){
     	Realm partition = pm.getPartition(Realm.class, realmName);
+    	
+    	if(partition == null){
+    		return false;
+    	}
+    	
     	IdentityManager identityManager = pm.createIdentityManager(partition);
     	IdentityQueryBuilder iqueryBuilder = identityManager.getQueryBuilder();
     	
@@ -71,7 +66,7 @@ public class PartitionManagerInitializer {
     	return true;
     }
     
-	private void createSystemUser(PartitionManager partitionManager, String realmName, String loginName) {
+	private void createSystemUserAndRealm(PartitionManager partitionManager, String realmName, String loginName) {
         Realm partition = partitionManager.getPartition(Realm.class, realmName);
         partition = new Realm(realmName);
         partitionManager.add(partition);

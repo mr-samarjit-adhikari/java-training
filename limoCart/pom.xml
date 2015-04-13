@@ -20,8 +20,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.limocart.authentication</groupId>
-  <artifactId>limocart-authentication-idm</artifactId>
-  <version>2.7.0.Final</version>
+  <artifactId>limocart-app</artifactId>
+  <version>1.0.0.Final-SNAPSHOT</version>
 
   <packaging>war</packaging>
 

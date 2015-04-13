@@ -34,7 +34,7 @@ import javax.inject.Named;
  */
 @Named
 @RequestScoped
-public class LoginController {
+public class LoginAction {
 
     @Inject
     private Identity identity;
