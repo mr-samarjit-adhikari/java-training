@@ -32,18 +32,12 @@ import javax.inject.Named;
  *
  * @author Samarjit Adhikari
  */
-@Named
+@Named("loginAction")
 @RequestScoped
 public class LoginAction {
 
     @Inject
     private Identity identity;
-
-    @Inject
-    private DefaultLoginCredentials loginCredentials;
-
-    @Inject
-    private IdentityManager identityManager;
 
     @Inject
     private FacesContext facesContext;
