@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,6 +22,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -52,13 +55,14 @@ public class Student {
 		this.studentDescription = studentDescription;
 	}
 	
-	@ElementCollection
+	//@ElementCollection(fetch=FetchType.EAGER)
+	@ElementCollection //By default it is FetchType.LAZY
 	@JoinTable(name = "STUDENT_ADDRESS",
 				joinColumns = @JoinColumn(name="STUDENT_ID")
 	)
 	@GenericGenerator(name="hilogen",strategy="hilo")
 	@CollectionId(columns = { @Column (name="STUDENT_ADDRID") }, generator = "hilogen", 
-				  type = @Type(type="long"))
+				  type = @Type(type="long"))	
 	Collection<StudentAddress> listOfStudentAddrs = new ArrayList<StudentAddress>();
 
 	public Collection<StudentAddress> getListOfStudent() {
