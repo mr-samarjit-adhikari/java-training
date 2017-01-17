@@ -48,6 +48,8 @@
         <mapping class="org.hibernate.tutorial.model.Book"/>
         <mapping class="org.hibernate.tutorial.model.SpecialEditionBook"/>
         <mapping class="org.hibernate.tutorial.model.InternationalBook"/>
+        <mapping class="org.hibernate.tutorial.model.Product"/>
+        <mapping class="org.hibernate.tutorial.model.Supplier"/>
 
     </session-factory>
 
