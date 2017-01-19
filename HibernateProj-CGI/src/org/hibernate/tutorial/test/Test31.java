@@ -31,6 +31,18 @@ public class Test31 {
 	            List results = query.list();
 	            TestUtils.displaySupplierNameList(results);
 	        }
+	        
+	        //parameter substitution 
+	        {
+	            System.out.println("\n---select p.supplier.name from Product p where price > :price and name like :pattern ");
+	            String hql = "select p.supplier.name from Product p where price > :price and name like :pattern ";
+	            Query query = session.createQuery(hql);
+	            query.setParameter("price", 2.0);
+	            query.setParameter("pattern", "P%");
+	                        
+	            List results = query.list();
+	            TestUtils.displaySupplierNameList(results);
+	        }	        
 			
 		}
 		finally{
