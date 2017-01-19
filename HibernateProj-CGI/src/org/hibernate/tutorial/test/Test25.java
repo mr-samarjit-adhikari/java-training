@@ -1,8 +1,6 @@
 package org.hibernate.tutorial.test;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;

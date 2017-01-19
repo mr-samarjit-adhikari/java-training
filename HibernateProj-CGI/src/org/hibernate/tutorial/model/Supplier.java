@@ -16,7 +16,7 @@ public class Supplier {
     private int id;
     private String name;
     
-    @OneToMany
+    @OneToMany(mappedBy="supplier")
     private List<Product> products;  
     
 	public int getId() {

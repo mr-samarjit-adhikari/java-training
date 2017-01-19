@@ -42,7 +42,7 @@ public class TestUtils {
 
 	public static void prepareTestData(Session session) {
 		Transaction tx = session.beginTransaction();
-		
+			
         Supplier supplier1 = new Supplier();
         supplier1.setName("Supplier Name 1");
         supplier1.setProducts(new ArrayList<Product>());
@@ -67,7 +67,7 @@ public class TestUtils {
         product2.setSupplier(supplier2);
         supplier2.getProducts().add(product2);
         session.save(product2);
-		
+             		
 		tx.commit();
 		tx = null;
 	}
