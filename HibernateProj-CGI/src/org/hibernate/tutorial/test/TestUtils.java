@@ -101,4 +101,27 @@ public class TestUtils {
         }
     }    
     
+    public static void displaySupplierNameList(List list) {
+        Iterator iter = list.iterator();
+        if (!iter.hasNext()) {
+            System.out.println("No suppliers to display.");
+            return;
+        }
+        while (iter.hasNext()) {
+            String supplier = (String) iter.next();
+            System.out.println(supplier);
+        }
+    }  
+    
+    public static void displayPriceList(List list) {
+        Iterator iter = list.iterator();
+        if (!iter.hasNext()) {
+            System.out.println("No price to display.");
+            return;
+        }
+        while (iter.hasNext()) {
+            Double price = (Double) iter.next();
+            System.out.println(price);
+        }
+    }        
 }
