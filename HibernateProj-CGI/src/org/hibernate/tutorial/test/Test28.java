@@ -2,11 +2,14 @@ package org.hibernate.tutorial.test;
 
 import java.util.List;
 
+import javax.print.attribute.standard.ReferenceUriSchemesSupported;
+
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.tutorial.model.Product;
 import org.hibernate.tutorial.model.Supplier;
 
 public class Test28 {
@@ -22,19 +25,8 @@ public class Test28 {
 		
 		try{
 			TestUtils.prepareTestData(session);
-			
-		    // Build a criteria with Association with FetchMode.JOIN
-	        {
-	            System.out.println("\n---Using criteria with Association with FetchMode.JOIN... ");
-	            Criteria crit = session.createCriteria(Supplier.class);
-	            
-	            crit.setFetchMode("products", FetchMode.JOIN);
-	            
-	            List results = crit.list();
-	            TestUtils.displaySupplierList(results);
-	            
-	        }
-	        
+			//session.clear(); //clear the 1st level cache 
+						
 	        // Build a criteria with Association with FetchMode.SELECT
 	        {
 	            System.out.println("\n---Using criteria with Association with FetchMode.SELECT... ");
@@ -45,7 +37,21 @@ public class Test28 {
 	            List results = crit.list();
 	            TestUtils.displaySupplierList(results);
 	            
+//	            Supplier supplier0 = (Supplier)results.get(0);
+//	            TestUtils.displayProductsList(supplier0.getProducts());	            
 	        }
+	        
+		    // Build a criteria with Association with FetchMode.JOIN
+	        {
+	            System.out.println("\n---Using criteria with Association with FetchMode.JOIN... ");
+	            Criteria crit = session.createCriteria(Supplier.class);
+	            
+	            crit.setFetchMode("products", FetchMode.JOIN);
+	            
+	            List results = crit.list();
+	            TestUtils.displaySupplierList(results);
+	            
+	        }        
 	        
 	        // Build a criteria with Association with FetchMode.DEFAULT
 	        {
