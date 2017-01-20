@@ -22,6 +22,10 @@ public class Product {
     private String description;
     private double price;
     
+    public Product(){
+    	super();
+    }
+    
     public Product(String name, String description, double price) {
         super();
         this.name = name;

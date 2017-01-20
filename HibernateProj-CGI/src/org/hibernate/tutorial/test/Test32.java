@@ -23,7 +23,17 @@ public class Test32 {
 			TestUtils.prepareTestData(session);
 			
 	        // Perform HQL Query with named query.
-	        // The "HQLpricing" named query is defined in the "Product"
+	        // The "HQLpricing" named query is defined in "Product" class
+	        {
+	            System.out.println("\n---Performing HQL query with named query...");
+	            Query<Double> query = session.createNamedQuery("HQLpricing", Double.class);
+	            query.setParameter("price", 25.0);
+	            
+	            List<Double> results = query.getResultList();
+	            TestUtils.displayObjectList(results);
+	        }	
+	        
+	        //perform a type unsafe query. Demonstrating 1st one is better 
 	        {
 	            System.out.println("\n---Performing HQL query with named query...");
 	            Query query = session.getNamedQuery("HQLpricing");
@@ -31,7 +41,7 @@ public class Test32 {
 	            
 	            List results = query.list();
 	            TestUtils.displayObjectList(results);
-	        }			
+	        }		        
 			
 		}
 		finally{
