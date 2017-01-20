@@ -5,9 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 @Entity
+@NamedQuery(name="HQLpricing", query="select product.price from Product product where product.price > :price")
 public class Product {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
