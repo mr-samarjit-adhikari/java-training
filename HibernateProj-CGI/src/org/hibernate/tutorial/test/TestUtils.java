@@ -3,9 +3,15 @@ package org.hibernate.tutorial.test;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
+import javax.persistence.Cache;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.metadata.ClassMetadata;
+import org.hibernate.stat.Statistics;
 import org.hibernate.tutorial.model.Product;
 import org.hibernate.tutorial.model.Supplier;
 
@@ -123,5 +129,39 @@ public class TestUtils {
             Double price = (Double) iter.next();
             System.out.println(price);
         }
-    }        
+    }  
+    
+    /**
+     * Evicts all second level cache hibernate entites. This is generally only
+     * needed when an external application modifies the database.
+     */
+    public static void evict2ndLevelCache(SessionFactory sf) {
+        System.out.println("\n---Clearing Second level cache");
+        try {
+        	Cache cache = sf.getCache();
+        	cache.evictAll();
+//            Map<String, ClassMetadata> classesMetadata = sf.getAllClassMetadata();
+//            for (String entityName : classesMetadata.keySet()) {
+//                System.out.println("Evicting Entity from 2nd level cache: " + entityName);
+//                sf.evictEntity(entityName);
+//            }
+        } catch (Exception e) {
+            System.out.println();
+        }
+
+    }
+
+    public static void displayStatistics(SessionFactory sf, Statistics stats) {
+
+        System.out.println("\n---Displaying Statistics.......");
+
+        System.out.println("Second level cache hit count "
+                + stats.getSecondLevelCacheHitCount());
+        System.out.println("Second level cache miss count "
+                + stats.getSecondLevelCacheMissCount());
+        System.out.println("Second level cache put count "
+                + stats.getSecondLevelCachePutCount());
+
+    }
+    
 }
