@@ -73,9 +73,8 @@ public class Test34 {
 	        // Supplier data will be accessed from cache
 	        {
 	            System.out.println("\n---Performing load operations");
-	            // Entity is fecthed very first time
-	            Supplier supplier = (Supplier) session.load(Supplier.class,
-	                    new Integer(1));
+	            // Entity is fetched from session cache 
+	            Supplier supplier = (Supplier) session.load(Supplier.class,new Integer(1));
 	            System.out.println(supplier.getName());
 
 	            // fetch the supplier entity again
