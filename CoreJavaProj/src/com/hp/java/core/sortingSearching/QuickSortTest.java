@@ -17,7 +17,7 @@ import java.util.Scanner;
  * SAMPLE OUTPUT
  * 1 2 3 4 5
  */
-public class QuickSortTest {
+public class QuickSortTest extends TestFixture{
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
         int inputArraySize = scanner.nextInt();
@@ -32,12 +32,5 @@ public class QuickSortTest {
         sortExecutor.sort(inputArray);
 
         printInputArray(inputArray);
-    }
-
-    private static void printInputArray(int[] inputArray) {
-        System.out.println("Sorted input: ");
-        for(int input:inputArray){
-            System.out.print(input+" ");
-        }
     }
 }
