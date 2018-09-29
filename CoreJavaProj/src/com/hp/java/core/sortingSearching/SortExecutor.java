@@ -36,7 +36,7 @@ public class SortExecutor {
         int k = 0;
         int[] AuxArray = new int[endIndex-startIndex+1];
 
-        for(int index = startIndex;index < endIndex;index++){
+        for(int index = startIndex;index <= endIndex;index++){
             //when input array is in increasing order.
             if(p>midIndex){
                 AuxArray[k++] = inputArray[q++];
@@ -54,14 +54,14 @@ public class SortExecutor {
 
         //Now override the input array.
         for(int idx=0;idx<k;idx++){
-            inputArray[idx] = AuxArray[idx];
+            inputArray[startIndex++] = AuxArray[idx];
         }
     }
 
     private void doQuickSort(int[] inputArray,int startIndex,int endIndex) {
         if(startIndex < endIndex){ //terminal condition for recursive call
             int partitionIndex = doQuickSortPartition(inputArray,startIndex,endIndex);
-            doQuickSort(inputArray,startIndex,partitionIndex-1);
+            doQuickSort(inputArray,startIndex,partitionIndex);
             doQuickSort(inputArray,partitionIndex+1,endIndex);
         }
     }

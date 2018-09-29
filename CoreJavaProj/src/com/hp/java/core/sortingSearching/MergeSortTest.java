@@ -19,7 +19,7 @@ import java.util.Scanner;
  * 3
  */
 public class MergeSortTest extends TestFixture {
-    public static void main(){
+    public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
         int inputArraySize = scanner.nextInt();
 
