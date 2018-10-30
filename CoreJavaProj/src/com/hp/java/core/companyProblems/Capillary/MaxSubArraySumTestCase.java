@@ -5,8 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+
 /**
- * Maximum Sum - Kadane algorithm
+ * Maximum Subarray Sum - Kadane's algorithm for single possible array
  * Given an array A of N integers. Now, you have to output the sum of unique values of the maximum subarray sum of all
  * the possible subarrays of the given array A.
  * Note: Subarray means contiguous elements with atleast one element in it.
@@ -60,26 +61,26 @@ public class MaxSubArraySumTestCase {
 
     private void calculateAndStoreMaxSubArraySum(int[] inputArray, int startIndex,int endIndex,
                                                  Map<Integer, Integer> sumCache) {
-        int arrayElementCount = endIndex - startIndex+1;
-        int[] dp = new int[arrayElementCount];
-        int sumPrev = dp[0] = inputArray[startIndex];
+        int sum =0, ans=0;
 
-        if(arrayElementCount==1){
-            CheckAndSetToCache(sumCache,dp[0]);
-            return;
-        }
+        for (int index=startIndex;index<=endIndex;index++){
 
-        for (int index=1;index<arrayElementCount;index++){
-            int sumCurr = sumPrev+inputArray[startIndex+index];
+            if(index==startIndex && inputArray[index] <0){ //first element of array is -ive
+                checkAndStoreToCache(sumCache,inputArray[index]);
+                continue;
+            }
 
-            dp[index] = Math.max(dp[index-1],sumCurr);
-
-            sumPrev = sumCurr;
-            CheckAndSetToCache(sumCache,dp[index]);
+            if(sum+inputArray[index] >0){   //Kadane's algorithm
+                sum += inputArray[index];
+            }else{
+                sum = 0;
+            }
+            ans = Math.max(ans,sum);
+            checkAndStoreToCache(sumCache,ans);
         }
     }
 
-    private void CheckAndSetToCache(Map<Integer, Integer> sumCache, int key) {
+    private void checkAndStoreToCache(Map<Integer, Integer> sumCache, int key) {
         Integer sumValue = sumCache.get(key);
         if(sumValue == null){
             sumCache.put(key,1);
