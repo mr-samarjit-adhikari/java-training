@@ -54,25 +54,21 @@ public class MaxArraySumTestCase {
         }
 
         MaxArraySumTestCase maxArraySumTestCase = new MaxArraySumTestCase();
-        int maxSum=0,prevMaxSum=0;
-        for(int idx=0;idx<arrayElementCount;idx++) {
-             maxSum = maxArraySumTestCase.maxSubsetSum(inputArray, idx,arrayElementCount-1);
-             if(maxSum > prevMaxSum){
-                 prevMaxSum = maxSum;
-             }
-        }
-        System.out.println(prevMaxSum);
+        int maxSum = maxArraySumTestCase.maxSubsetSum(inputArray);
+
+        System.out.println(maxSum);
     }
 
-    private int maxSubsetSum(int[] inputArray,int startIdx,int endIdx) {
-        int inputArrayLen = endIdx-startIdx+1;
+    private int maxSubsetSum(int[] inputArray) {
+        int inputArrayLen = inputArray.length;
 
         int dp[] = new int[inputArrayLen];
-        dp[0] = dp[1] = inputArray[startIdx];
-
+        dp[0] = max(0,inputArray[0]);
         if(inputArrayLen==1) return dp[0];
+        dp[1] = max(dp[0],inputArray[1]);
+
         for(int index=2;index<inputArrayLen;index++){
-            dp[index] = max(dp[index-1], max(dp[index-2],dp[index-2]+inputArray[index]));
+            dp[index] = max(dp[index-2], max(dp[index-1],dp[index-2]+inputArray[index]));
         }
 
         return max(dp[inputArrayLen-1],dp[inputArrayLen-2]);
