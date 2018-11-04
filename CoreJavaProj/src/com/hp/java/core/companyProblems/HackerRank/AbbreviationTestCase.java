@@ -22,21 +22,47 @@ public class AbbreviationTestCase {
         int aStringLen = str1.length();
         char[] bStrArray = str2.toCharArray();
         char[] aStrArray = str1.toCharArray();
-        int aindex = aStringLen-1;
-
+        int aindex = 0;
 
         if(aStringLen < bStringLen) return "NO";
 
-        for(int bindex=bStringLen-1;bindex>=0;bindex--){
+        for(int bindex=0;bindex<bStringLen;bindex++){
 
-            while(aindex>=0){
-                if((bStrArray[bindex] == aStrArray[aindex]) ||
-                        (bStrArray[bindex] == (aStrArray[aindex]-32)))
+            if(0==(aindex - aStringLen)) return "NO";
+
+            while(aindex<aStringLen){
+                if(bStrArray[bindex] == aStrArray[aindex])
                 {
-                    aindex--; break;
+                    aindex++; break;
                 }
                 else if(aStrArray[aindex]>='a' && aStrArray[aindex]<='z'){
-                    aindex--;continue;
+                    if(bStrArray[bindex] == (aStrArray[aindex]-32)){
+                        if(bStrArray[bindex] == (aStrArray[aindex+1]-32)) {
+                            aindex++;
+                            continue;
+                        }
+                        else{
+                            aindex++; break;
+                        }
+                    }
+                    else if(aindex == aStringLen-1){
+                        return "NO";
+                    }
+                    else {
+                        aindex++;
+                        continue;
+                    }
+                }
+                else{
+                    return "NO";
+                }
+            }
+        }
+
+        if(aindex<aStringLen){
+            while (aindex< aStringLen){
+                if(aStrArray[aindex]>='a' && aStrArray[aindex]<='z'){
+                    aindex++; continue;
                 }
                 else{
                     return "NO";
