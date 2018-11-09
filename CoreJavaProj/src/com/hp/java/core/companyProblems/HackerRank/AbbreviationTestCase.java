@@ -19,7 +19,7 @@ public class AbbreviationTestCase {
         for(int count=0;count<testCaseCount;count++){
             String str1 = scanner.nextLine();
             String str2 = scanner.nextLine();
-            String result = testCase.abbreviation(str1, str2);
+            String result = testCase.abbreviation(str1+"$", str2+"$");
             System.out.println(result);
         }
     }
