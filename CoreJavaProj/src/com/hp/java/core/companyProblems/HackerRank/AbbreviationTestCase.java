@@ -37,7 +37,7 @@ public class AbbreviationTestCase {
 
         initializeDP(dp,bStringLen,aStringLen);
 
-        dp[0][0] = compareChars(bStrArray[0],aStrArray[0]);
+            dp[0][0] = compareChars(bStrArray[0],aStrArray[0],aStrArray[1]);
         if(dp[0][0] == Match.CHAR_SKIP){
             aIndex++;
         }else if(dp[0][0] == Match.CHAR_MATCH){
@@ -76,6 +76,7 @@ public class AbbreviationTestCase {
     private Match checkAndSet(char[] bStrArray, int bindex, char[] aStrArray, int aindex,Match dp[][]) {
         Match lastMatch = Match.UNKNOWN;
         Match currMatch = Match.UNKNOWN;
+        char lookAheadChar = '$';
 
         if((bindex-1) >= 0 && (aindex-1)>=0){
             if(dp[bindex-1][aindex-1] != Match.UNKNOWN){
@@ -91,7 +92,10 @@ public class AbbreviationTestCase {
 
         if(lastMatch != Match.UNKNOWN){
             if((lastMatch == Match.CHAR_SKIP) || (lastMatch == Match.CHAR_MATCH)) {
-                dp[bindex][aindex]= currMatch = compareChars(bStrArray[bindex],aStrArray[aindex]);
+                if(aStrArray[aindex] != '$'){
+                    lookAheadChar = aStrArray[aindex+1];
+                }
+                dp[bindex][aindex]= currMatch = compareChars(bStrArray[bindex],aStrArray[aindex],lookAheadChar);
             }
             else{
                 return Match.CHAR_MISMATCH;
@@ -102,10 +106,18 @@ public class AbbreviationTestCase {
     }
 
 
-    private Match compareChars(char bStrChar, char aStrChar) {
+    private Match compareChars(char bStrChar, char aStrChar,char aStrCharLookAhead) {
 
-        if ((aStrChar == bStrChar)||(bStrChar == aStrChar -32)) {
+        if (aStrChar == bStrChar) {
             return Match.CHAR_MATCH;
+        }
+        else if(bStrChar == aStrChar -32){
+            if(bStrChar == aStrCharLookAhead){
+                return Match.CHAR_SKIP;
+            }
+            else{
+                return Match.CHAR_MATCH;
+            }
         }
         else if(aStrChar >= 'a' && aStrChar<='z'){
             return Match.CHAR_SKIP;
