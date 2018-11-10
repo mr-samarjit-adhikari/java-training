@@ -19,110 +19,34 @@ public class AbbreviationTestCase {
         for(int count=0;count<testCaseCount;count++){
             String str1 = scanner.nextLine();
             String str2 = scanner.nextLine();
-            String result = testCase.abbreviation(str1+"$", str2+"$");
+            String result = testCase.abbreviation(str1, str2);
             System.out.println(result);
         }
     }
 
     private String abbreviation(String str1, String str2) {
-        int bStringLen = str2.length();
-        int aStringLen = str1.length();
-        char[] bStrArray = str2.toCharArray();
-        char[] aStrArray = str1.toCharArray();
-        Match [][] dp = new Match[bStringLen][aStringLen];
-        int aIndex = 0;
-        int bIndex = 0;
+        final int MAX = 1000;
+        final boolean[][] dp = new boolean[MAX+1][MAX+1];
 
-        if(aStringLen < bStringLen) return "NO";
+        char[] a = str1.toCharArray();
+        char[] b = str2.toCharArray();
+        int A = a.length;
+        int B = b.length;
 
-        initializeDP(dp,bStringLen,aStringLen);
-
-            dp[0][0] = compareChars(bStrArray[0],aStrArray[0],aStrArray[1]);
-        if(dp[0][0] == Match.CHAR_SKIP){
-            aIndex++;
-        }else if(dp[0][0] == Match.CHAR_MATCH){
-            aIndex++;bIndex++;
-        }else{
-            return "NO";
+        for (int i = 0; i <= A; i++) {
+            dp[i][0] = true;
         }
-
-        int aindex = aIndex;
-        for(int bindex=bIndex;bindex<bStringLen;bindex++){
-            while(aindex<aStringLen){
-                Match matchStatus = checkAndSet(bStrArray,bindex,aStrArray,aindex,dp);
-
-                if(matchStatus == Match.CHAR_SKIP){
-                    aindex++;continue;
-                }else if(matchStatus == Match.CHAR_MATCH){
-                    aindex++;break;
+        for (int i = 1; i <= A; i++) {
+            for (int j = 1; j <= B; j++) {
+                dp[i][j] = false;
+                if (Character.isLowerCase(a[i-1])) {
+                    dp[i][j] |= dp[i-1][j];
                 }
-                else{
-                    return "NO";
+                if (Character.toUpperCase(a[i-1]) == b[j-1]) {
+                    dp[i][j] |= dp[i-1][j-1];
                 }
             }
         }
-
-        return "YES";
-    }
-
-    private void initializeDP(Match[][] dp,int bStrlen,int aStrLen) {
-        for(int bindex=0;bindex<bStrlen;bindex++){
-            for(int aindex=0;aindex<aStrLen;aindex++){
-                dp[bindex][aindex] = Match.UNKNOWN;
-            }
-        }
-    }
-
-    private Match checkAndSet(char[] bStrArray, int bindex, char[] aStrArray, int aindex,Match dp[][]) {
-        Match lastMatch = Match.UNKNOWN;
-        Match currMatch = Match.UNKNOWN;
-        char lookAheadChar = '$';
-
-        if((bindex-1) >= 0 && (aindex-1)>=0){
-            if(dp[bindex-1][aindex-1] != Match.UNKNOWN){
-                lastMatch =   dp[bindex-1][aindex-1];
-            }
-        }
-
-        if(bindex>=0 && (aindex-1) >= 0){
-            if(dp[bindex][aindex-1] != Match.UNKNOWN){
-                lastMatch = dp[bindex][aindex-1];
-            }
-        }
-
-        if(lastMatch != Match.UNKNOWN){
-            if((lastMatch == Match.CHAR_SKIP) || (lastMatch == Match.CHAR_MATCH)) {
-                if(aStrArray[aindex] != '$'){
-                    lookAheadChar = aStrArray[aindex+1];
-                }
-                dp[bindex][aindex]= currMatch = compareChars(bStrArray[bindex],aStrArray[aindex],lookAheadChar);
-            }
-            else{
-                return Match.CHAR_MISMATCH;
-            }
-        }
-
-        return currMatch;
-    }
-
-
-    private Match compareChars(char bStrChar, char aStrChar,char aStrCharLookAhead) {
-
-        if (aStrChar == bStrChar) {
-            return Match.CHAR_MATCH;
-        }
-        else if(bStrChar == aStrChar -32){
-            if(bStrChar == aStrCharLookAhead){
-                return Match.CHAR_SKIP;
-            }
-            else{
-                return Match.CHAR_MATCH;
-            }
-        }
-        else if(aStrChar >= 'a' && aStrChar<='z'){
-            return Match.CHAR_SKIP;
-        }
-
-        return Match.CHAR_MISMATCH;
+        return(dp[A][B] ? "YES" : "NO");
     }
 }
