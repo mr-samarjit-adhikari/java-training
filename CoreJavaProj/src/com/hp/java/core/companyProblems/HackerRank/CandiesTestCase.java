@@ -19,8 +19,8 @@ public class CandiesTestCase {
 
     private long solve(int[] arr) {
         int[] candies = new int[arr.length];//candies array
-        int[] dp = new int[arr.length];
-        int optCandiesCount = 0;
+        long[] dp = new long[arr.length];
+        long optCandiesCount = 0;
 
         dp[0] = 1;
         candies[0] = 1;
