@@ -20,16 +20,42 @@ public class CandiesTestCase {
     private long solve(int[] arr) {
         int[] candies = new int[arr.length];//candies array
         int[] dp = new int[arr.length];
+        int optCandiesCount = 0;
 
         dp[0] = 1;
         candies[0] = 1;
 
         for(int i=1;i<arr.length;i++){
             dp[i] = dp[i-1] + compAndDist(arr,i,candies);
-            //System.out.println("i-"+i+"dp[i] - "+dp[i]);
+        }
+        optCandiesCount += dp[arr.length-1];
+
+        dp[arr.length-1] = 0;
+        for(int i=arr.length-1;i>=1;i--){
+            dp[i-1] = dp[i] + reCompAndDist(arr,i,candies);
         }
 
-        return dp[arr.length-1];
+        for(int i=0;i<candies.length;i++){
+            System.out.println(candies[i]+" ");
+        }
+        System.out.println();
+
+        optCandiesCount += dp[0];
+
+        return optCandiesCount;
+    }
+
+    private int reCompAndDist(int[] arr, int i, int[] candies) {
+        int allocatedCandies = 0;
+        if(arr[i-1] > arr[i]){
+            if(candies[i-1] <= candies[i]){
+                int tmp = candies[i-1];
+                candies[i-1] = candies[i] +1;
+                allocatedCandies += (candies[i-1] - tmp);
+            }
+        }
+
+        return allocatedCandies;
     }
 
     private int compAndDist(int[] arr, int i, int[] candies) {
