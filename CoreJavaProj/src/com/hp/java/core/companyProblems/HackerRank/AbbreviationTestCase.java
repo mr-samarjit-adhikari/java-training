@@ -3,12 +3,6 @@ package com.hp.java.core.companyProblems.HackerRank;
 import java.util.Scanner;
 
 public class AbbreviationTestCase {
-    public enum Match{
-        CHAR_MATCH,
-        CHAR_SKIP,
-        CHAR_MISMATCH,
-        UNKNOWN,
-    }
 
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
