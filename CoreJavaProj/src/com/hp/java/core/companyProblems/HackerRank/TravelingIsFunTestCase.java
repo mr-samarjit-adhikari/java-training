@@ -1,7 +1,5 @@
 package com.hp.java.core.companyProblems.HackerRank;
 
-import org.omg.PortableInterceptor.INACTIVE;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,13 +13,13 @@ public class TravelingIsFunTestCase {
         int g = in.nextInt();
         //origin cities
         int originCities_cnt = in.nextInt();
-        List<Integer> originCities = new ArrayList(originCities_cnt);
+        List<Integer> originCities = new ArrayList<>(originCities_cnt);
         for(int originCities_i = 0; originCities_i < originCities_cnt; originCities_i++){
             originCities.add(in.nextInt());
         }
         //destination cities
         int destinationCities_cnt = in.nextInt();
-        List<Integer> destinationCities = new ArrayList(destinationCities_cnt);
+        List<Integer> destinationCities = new ArrayList<>(destinationCities_cnt);
         for(int originCities_i = 0; originCities_i < destinationCities_cnt; originCities_i++){
             destinationCities.add(in.nextInt());
         }
@@ -48,7 +46,7 @@ public class TravelingIsFunTestCase {
             for (int j = 2 * i; j <= n; j += i)
                 unionFind(j, i, root, ids);
 
-        List<Integer> res = new ArrayList(originCities.size());
+        List<Integer> res = new ArrayList<>(originCities.size());
         Iterator<Integer> itSrc = originCities.iterator();
         Iterator<Integer> itDest = destinationCities.iterator();
 
