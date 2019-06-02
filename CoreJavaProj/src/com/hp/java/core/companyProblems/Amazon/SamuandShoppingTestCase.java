@@ -1,14 +1,7 @@
 package com.hp.java.core.companyProblems.Amazon;
 
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-
-import static com.hp.java.core.companyProblems.Amazon.SamuandShoppingTestCase.ShoppingItems.NONE;
-import static com.hp.java.core.companyProblems.Amazon.SamuandShoppingTestCase.ShoppingItems.PANT;
-import static com.hp.java.core.companyProblems.Amazon.SamuandShoppingTestCase.ShoppingItems.SHIRT;
-import static com.hp.java.core.companyProblems.Amazon.SamuandShoppingTestCase.ShoppingItems.SHOE;
+import static java.lang.Math.min;
 
 /**
  * Samu is in super market and in a mood to do a lot of shopping. She needs to buy shirts, pants and shoes for herself
@@ -37,91 +30,35 @@ import static com.hp.java.core.companyProblems.Amazon.SamuandShoppingTestCase.Sh
  */
 public class SamuandShoppingTestCase {
     public static void main(String[] args){
-        Scanner scanner = new Scanner(System.in);
-        int tc = scanner.nextInt();
+        Scanner s = new Scanner(System.in);
+        int t = s.nextInt();
 
-        while(tc>0){
-            SamuandShoppingTestCase testCase = new SamuandShoppingTestCase();
-            int shopCount = scanner.nextInt();
-            List<item> shops = new ArrayList(shopCount);
+        while(t!=0)
+        {
+            int n = s.nextInt();
 
-            while(shopCount>0){
-                testCase.addShirtPantShoe(shops,scanner.nextInt(),scanner.nextInt(),scanner.nextInt());
-                shopCount--;
+            int a[][] = new int[3][n];
+            int b[][] = new int[3][n];
+            for(int i=0;i<n;i++)
+            {
+                a[0][i] = s.nextInt();
+                a[1][i] = s.nextInt();
+                a[2][i] = s.nextInt();
             }
-            int minCost = testCase.findMinCostShopping(shops);
-            System.out.println(minCost);
 
-            tc--;
-        }
+            b[0][0]=a[0][0];
+            b[1][0]=a[1][0];
+            b[2][0]=a[2][0];
 
-    }
+            for(int i=1;i<n;i++)
+            {
+                b[0][i]=a[0][i]+min(b[1][i-1],b[2][i-1]);
+                b[1][i]=a[1][i]+min(b[0][i-1],b[2][i-1]);
+                b[2][i]=a[2][i]+min(b[0][i-1],b[1][i-1]);
+            }
 
-    private int findMinCostShopping(List<item> shops) {
-        ShoppingItems prevItem = NONE;
-        int minCost = 0;
-        for(item shop:shops){
-            minCost += findMinCost(shop,prevItem);
-        }
-
-        return minCost;
-    }
-
-    private int findMinCost(item shop, ShoppingItems prevItem) {
-        int minCost = 0;
-        int shirtItemCost = shop.getCost();
-        int pantItemCost = shop.getNext().getCost();
-        int shoeItemCost = shop.getNext().getNext().getCost();
-
-        switch(prevItem){
-            case NONE:
-                minCost = Math.min(shirtItemCost,pantItemCost);
-        }
-        return 0;
-    }
-
-    private void addShirtPantShoe(List<item> shops, int shirtCost, int pantCost, int shoeCost) {
-        item shirtItem = new item(SHIRT,shirtCost);
-        item pantItem = new item(PANT,pantCost);
-        item shoeItem = new item(SHOE,shoeCost);
-
-        pantItem.setNext(shoeItem);
-        shirtItem.setNext(pantItem);
-
-        shops.add(shirtItem);
-    }
-
-    public enum ShoppingItems{
-        SHIRT,
-        PANT,
-        SHOE,
-        NONE
-    }
-
-    class item{
-        private int cost;
-        private ShoppingItems shopItemType;
-        private item next;
-
-        private item(ShoppingItems name,int cost){
-            shopItemType= name;
-            this.cost = cost;
-        }
-
-        public int getCost() {
-            return cost;
-        }
-
-        public ShoppingItems getShopItemType() {
-            return shopItemType;
-        }
-
-        public void setNext(item next) {
-            this.next = next;
-        }
-
-        public item getNext() {
-            return next;
+            t--;
+            System.out.println(min(b[0][n-1],min(b[1][n-1],b[2][n-1])));
         }
     }
 }
