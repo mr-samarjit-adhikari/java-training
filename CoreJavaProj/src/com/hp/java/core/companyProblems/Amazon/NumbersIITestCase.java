@@ -1,5 +1,36 @@
 package com.hp.java.core.companyProblems.Amazon;
 
+/**
+ * Given two numbers a and b, you have to find the Nth number which is divisible by a or b.
+ *
+ * Input :
+ *
+ * First line consists of an integer T, denoting the number of test cases.
+ * Second line contains three integers a, b and N .
+ *
+ * Output :
+ *
+ * For each test case, print the
+ *
+ * number in a new line.
+ *
+ * Constraints :
+ *
+ * SAMPLE INPUT
+ *
+ * 1
+ * 2 3 10
+ *
+ * SAMPLE OUTPUT
+ *
+ * 15
+ *
+ * Explanation
+ *
+ * The numbers which are divisible by 2 or 3 are: 2,3,4,6,8,9,10,12,14,15
+ * and the 10th number is 15.
+ */
+
 import java.util.Scanner;
 
 import static java.lang.Math.max;
