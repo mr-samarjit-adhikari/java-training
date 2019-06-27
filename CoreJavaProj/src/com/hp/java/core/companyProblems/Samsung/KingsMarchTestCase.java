@@ -46,7 +46,7 @@ public class KingsMarchTestCase {
             int n = scanner.nextInt();
             String[][] inputArray = new String[n][n];
             testCase.readInputArray(scanner,inputArray,n);
-            int maxDist  = testCase.calcMaxDistAndPath(inputArray,n);
+            int maxDist  = testCase.calcMaxDist(inputArray,n);
             int maxDistPathCount = testCase.numberOfPaths(n);
             System.out.println(maxDist+" "+maxDistPathCount);
 
@@ -54,7 +54,7 @@ public class KingsMarchTestCase {
         }
     }
 
-    private int calcMaxDistAndPath(String[][] inputArray, int n) {
+    private int calcMaxDist(String[][] inputArray, int n) {
         int maxDist = 0;
         int[][] dp = new int[n+1][n+1];
 
