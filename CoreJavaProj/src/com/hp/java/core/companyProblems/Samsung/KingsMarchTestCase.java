@@ -68,18 +68,17 @@ public class KingsMarchTestCase {
         int[][] dp = new int[n][n];
 
         //initialize
-        for(int col=n-1;col>=0;col--){
-            if("s".equals(inputArray[n-1][col]) ||
-                    "x".equals(inputArray[n-1][col]) ){
-                dp[n - 1][col] = 0;
+        dp[n-1][n-1] = 0;
+        for(int col=n-2;col>=0;col--){
+            if("x".equals(inputArray[n-1][col])){
+                break;
             }else{
                 dp[n-1][col] = Integer.parseInt(inputArray[n-1][col])+(dp[n-1][col+1]);
             }
         }
-        for(int row=n-1;row>=0;row--){
-            if("s".equals(inputArray[row][n-1]) ||
-                    "x".equals(inputArray[row][n-1]) ){
-                dp[row][n-1] = 0;
+        for(int row=n-2;row>=0;row--){
+            if("x".equals(inputArray[row][n-1])){
+                break;
             }else{
                 dp[row][n-1] = Integer.parseInt(inputArray[row][n-1])+(dp[row+1][n-1]);
             }
@@ -91,9 +90,10 @@ public class KingsMarchTestCase {
                     dp[row][col] = 0;
                 }else{
                     int inputInt = Integer.parseInt(inputArray[row][col]);
-                    int val1 = inputInt + dp[row][col+1];
-                    int val2 = inputInt + dp[row+1][col];
-                    int val3 = inputInt + dp[row+1][col+1];
+                    int val1 = (dp[row][col+1]==0)?0:(inputInt + dp[row][col+1]);
+                    int val2 = (dp[row+1][col]==0)?0:(inputInt + dp[row+1][col]);
+                    int val3 = (dp[row+1][col+1]==0)?0:(inputInt + dp[row+1][col+1]);
+
                     dp[row][col] = Math.max(Math.max(val1,val2),val3);
                     maxDistPathCount += numberOfPaths(dp[row][col],inputInt,val1,val2,val3);
                 }
@@ -108,6 +108,8 @@ public class KingsMarchTestCase {
     private int numberOfPaths(int target,int input,int val1,int val2,int val3)
     {
         int pathCount = 0;
+        if(target==0) return pathCount;
+
         if(target == (input+val1)) pathCount++;
         if(target == (input+val2)) pathCount++;
         if(target == (input+val3)) pathCount++;
