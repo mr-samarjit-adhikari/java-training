@@ -2,7 +2,10 @@ package com.hp.java.core.companyProblems.Samsung;
 
 import java.util.Scanner;
 
-
+/**
+ * TBD: update the inoutArray with 'x' where path is not possible
+ * reimplement calcMaxDistAndPathCount()
+ */
 
 /**
  * The King's March
@@ -63,7 +66,6 @@ public class KingsMarchTestCase {
     }
 
     private void calcMaxDistAndPathCount(String[][] inputArray, int n) {
-        int maxDist = 0;
         int maxDistPathCount = 0;
         int[][] dp = new int[n][n];
 
@@ -100,7 +102,7 @@ public class KingsMarchTestCase {
             }
         }
 
-        maxDist = dp[0][0];
+        int maxDist = dp[0][0];
 
         System.out.println(maxDist+" "+maxDistPathCount);
     }
