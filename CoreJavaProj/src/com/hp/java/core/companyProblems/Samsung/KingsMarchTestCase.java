@@ -56,16 +56,15 @@ public class KingsMarchTestCase {
             int n = scanner.nextInt();
             String[][] inputArray = new String[n][n];
             testCase.readInputArray(scanner,inputArray,n);
-            int maxDist  = testCase.calcMaxDist(inputArray,n);
-            int maxDistPathCount = testCase.numberOfPaths(n);
-            System.out.println(maxDist+" "+maxDistPathCount);
+            testCase.calcMaxDistAndPathCount(inputArray,n);
 
             testCaseCount--;
         }
     }
 
-    private int calcMaxDist(String[][] inputArray, int n) {
+    private void calcMaxDistAndPathCount(String[][] inputArray, int n) {
         int maxDist = 0;
+        int maxDistPathCount = 0;
         int[][] dp = new int[n][n];
 
         //initialize
@@ -96,29 +95,24 @@ public class KingsMarchTestCase {
                     int val2 = inputInt + dp[row+1][col];
                     int val3 = inputInt + dp[row+1][col+1];
                     dp[row][col] = Math.max(Math.max(val1,val2),val3);
+                    maxDistPathCount += numberOfPaths(dp[row][col],inputInt,val1,val2,val3);
                 }
             }
         }
 
         maxDist = dp[0][0];
-        return maxDist;
+
+        System.out.println(maxDist+" "+maxDistPathCount);
     }
 
-    private int numberOfPaths(int n)
+    private int numberOfPaths(int target,int input,int val1,int val2,int val3)
     {
-        int[][] count = new int [n][n];
+        int pathCount = 0;
+        if(target == (input+val1)) pathCount++;
+        if(target == (input+val2)) pathCount++;
+        if(target == (input+val3)) pathCount++;
 
-        for (int i = 0; i < n; i++)
-            count[i][0] = 1;
-
-        for (int j = 0; j < n; j++)
-            count[0][j] = 1;
-
-        for (int i = 1; i < n; i++) {
-            for (int j = 1; j < n; j++)
-                count[i][j] = count[i - 1][j] + count[i][j - 1] + count[i-1][j-1];
-        }
-        return count[n - 1][n - 1];
+        return pathCount;
     }
 
     private void readInputArray(Scanner scanner, String[][] inputArray,int size) {
