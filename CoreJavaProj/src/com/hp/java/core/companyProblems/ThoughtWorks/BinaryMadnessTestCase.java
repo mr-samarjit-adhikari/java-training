@@ -60,41 +60,42 @@ public class BinaryMadnessTestCase {
 
             BinaryMadnessTestCase testCase = new BinaryMadnessTestCase();
             String inputString = Long.toBinaryString(scanner.nextLong());
-            int oddOneCount = testCase.countOdd(inputString, 0);
-            int oddZeroCount = testCase.countOdd(inputString, 1);
-            System.out.println(oddOneCount + " " + oddZeroCount);
+            int oddOneCount = testCase.countOdd1s(inputString);
+            //int oddZeroCount = testCase.countOdd0s(inputString);
+            //System.out.println(oddOneCount + " " + oddZeroCount);
+            System.out.println(oddOneCount);
 
             testCaseCount--;
         }
 
     }
 
-    private int countOdd(String inputInteger, int digit) {
+    private int countOdd1s(String inputInteger) {
         int N = inputInteger.length();
-        int res = 0;
-        int countOfbinDigit = 0;
-        int[] freq = new int[N + 1];
+        int oddSum = 0;
+        int[] subStrFreq = new int[N + 1];
 
-        freq[0] = 1;
+        int firstCharVal = Character.getNumericValue(inputInteger.charAt(0));
+        if(firstCharVal==0){
+            subStrFreq[0] = 0;
+            oddSum = 0;
+        }
+        else{
+            subStrFreq[0] = 1;
+            oddSum = 1;
+        }
 
-        for (int i = 0; i < N; i++) {
-            countOfbinDigit += (inputInteger.charAt(i) == String.valueOf(digit).charAt(0)) ? 1 : 0;
-            freq[countOfbinDigit]++;
+        for (int i = 1; i < N; i++) {
+            oddSum = oddSum + Character.getNumericValue(inputInteger.charAt(i));
 
-            int K=0;
-            if((countOfbinDigit%2)!=0){
-                K = countOfbinDigit;
-            }
-            else{
-                continue;
-            }
-
-            if (countOfbinDigit >= K) {
-                res += freq[countOfbinDigit - K];
+            if(oddSum %2 !=0){
+                subStrFreq[i] = subStrFreq[i-1] +1;
+            }else{
+                subStrFreq[i] = subStrFreq[i-1];
             }
         }
 
-        return res;
+        return subStrFreq[N-1];
     }
 }
 
