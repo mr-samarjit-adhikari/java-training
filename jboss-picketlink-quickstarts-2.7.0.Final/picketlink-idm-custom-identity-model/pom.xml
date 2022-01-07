@@ -56,7 +56,7 @@
 
     <version.hibernate.entitymanager>4.3.5.Final</version.hibernate.entitymanager>
 
-    <version.h2db>1.3.161</version.h2db>
+    <version.h2db>2.0.206</version.h2db>
 
     <!-- maven-war-plugin -->
     <version.war.plugin>2.1.1</version.war.plugin>
